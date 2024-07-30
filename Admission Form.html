@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+    
+  <meta charset="UTF-8">
+
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stylish Admission Form</title>
+
+    
+    
+  <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            box-sizing: border-box;
+        }
+        .form-container:hover {
+            transform: scale(1.02);
+        }
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #74ebd5;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .form-group input[type="submit"] {
+            background: #5cb85c;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+        .form-group input[type="submit"]:hover {
+            background: #4cae4c;
+        }
+        .form-group .reset-btn {
+            background: #f44336;
+            margin-top: 10px;
+        }
+        .form-group .reset-btn:hover {
+            background: #e53935;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+                max-width: 100%;
+            }
+            .form-group input, .form-group select, .form-group textarea {
+                font-size: 14px;
+                padding: 10px;
+            }
+            .form-group input[type="submit"], .form-group .reset-btn {
+                padding: 10px 15px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head><body>
+
+    
+<div class="form-container">
+        <h2>Admission Form</h2>
+        <form id="admissionForm" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input id="name" name="name" required="" type="text">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input id="email" name="email" required="" type="email">
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input id="dob" name="dob" required="" type="date">
+            </div>
+            <div class="form-group">
+                <label for="course">Select Course:</label>
+                <select id="course" name="course" required="">
+                    <option value="science">Science</option>
+                    <option value="commerce">Commerce</option>
+                    <option value="arts">Arts</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Why do you want to join us?</label>
+                <textarea id="message" name="message" rows="5" required=""></textarea>
+            </div>
+            <div class="form-group">
+                <input value="Submit Application" type="submit">
+                <input value="Reset" class="reset-btn" type="reset">
+            </div>
+        </form>
+    </div>
+
+
+    
+<script>
+        function validateForm() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var dob = document.getElementById('dob').value;
+            var course = document.getElementById('course').value;
+            var message = document.getElementById('message').value;
+
+            if (name === "" || email === "" || dob === "" || course === "" || message === "") {
+                alert("All fields must be filled out");
+                return false;
+            }
+
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+
+            var today = new Date();
+            var birthDate = new Date(dob);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            if (age < 18) {
+                alert("You must be at least 18 years old to apply");
+                return false;
+            }
+
+            alert("Form submitted successfully!");
+            return true;
+        }
+    </script>
+</body></html>
